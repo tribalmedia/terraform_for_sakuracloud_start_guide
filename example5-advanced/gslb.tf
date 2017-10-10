@@ -16,5 +16,5 @@ resource "sakuracloud_gslb" "gslb" {
 resource "sakuracloud_gslb_server" "servers" {
     count = "${length(var.web_servers)}"
     gslb_id = "${sakuracloud_gslb.gslb.id}"
-    ipaddress = "${sakuracloud_server.web_servers.*.base_nw_ipaddress[count.index]}"
+    ipaddress = "${sakuracloud_server.web_servers.*.ipaddress[count.index]}"
 }

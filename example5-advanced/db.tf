@@ -35,7 +35,7 @@ resource sakuracloud_server "db_servers" {
     name = "${lookup(var.db_servers[count.index], "name")}"
     disks = ["${sakuracloud_disk.db_disks.*.id[count.index]}"]
     tags = ["@virtio-net-pci"]
-    base_interface = "${
+    nic = "${
         lookup(
             zipmap(
                 var.switch_zones,
@@ -44,9 +44,9 @@ resource sakuracloud_server "db_servers" {
             lookup(var.db_servers[count.index], "zone")
         )
     }"
-    base_nw_ipaddress = "${lookup(var.db_servers[count.index], "ipaddr")}"
-    base_nw_gateway = "${lookup(var.db_servers[count.index], "gateway")}"
-    base_nw_mask_len = "${lookup(var.db_servers[count.index], "mask_len")}"
+    ipaddress = "${lookup(var.db_servers[count.index], "ipaddr")}"
+    gateway = "${lookup(var.db_servers[count.index], "gateway")}"
+    nw_mask_len = "${lookup(var.db_servers[count.index], "mask_len")}"
 
     # 直接SSH接続できないため、プロビジョニングはスタートアップスクリプトで行う
 
