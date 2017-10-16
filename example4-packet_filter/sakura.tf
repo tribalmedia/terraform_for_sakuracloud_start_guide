@@ -19,8 +19,6 @@ resource "sakuracloud_server" "server01" {
     name = "server01"
     # 接続するディスク
     disks = ["${sakuracloud_disk.disk01.id}"]
-    # タグ(NICの準仮想化モード有効化)
-    tags = ["@virtio-net-pci"]
 
     # パケットフィルタを接続
     packet_filter_ids = ["${sakuracloud_packet_filter.filter01.id}"]

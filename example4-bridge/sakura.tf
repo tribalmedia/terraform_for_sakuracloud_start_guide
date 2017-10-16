@@ -34,15 +34,13 @@ resource "sakuracloud_server" "servers" {
     name = "server${count.index}"
     # 接続するディスク
     disks = ["${sakuracloud_disk.disks.*.id[count.index]}"]
-    # タグ(NICの準仮想化モード有効化)
-    tags = ["@virtio-net-pci"]
 
     # スイッチを接続
-    base_interface = "${sakuracloud_switch.sw.*.id[count.index]}"
+    nic = "${sakuracloud_switch.sw.*.id[count.index]}"
 
     # eth0のIPアドレス/ネットマスク設定
-    base_nw_ipaddress = "${var.private_ip_addresses[count.index]}"
-    base_nw_mask_len = 24
+    ipaddress = "${var.private_ip_addresses[count.index]}"
+    nw_mask_len = 24
 
     # ゾーン
     zone = "${var.target_zones[count.index]}"

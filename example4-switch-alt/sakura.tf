@@ -27,15 +27,13 @@ resource "sakuracloud_server" "servers" {
     name = "server${count.index}"
     # 接続するディスク
     disks = ["${sakuracloud_disk.disks.*.id[count.index]}"]
-    # タグ(NICの準仮想化モード有効化)
-    tags = ["@virtio-net-pci"]
 
     # 最初のNICはインターネットへ接続
     # (デフォルトでインターネット接続されるため、省略可能)
-    base_interface = "shared"
+    nic = "shared"
 
     # 2番目以降のNICは接続するスイッチのIDをリストで設定することで作成される
-    additional_interfaces = ["${sakuracloud_switch.sw01.id}"]
+    additional_nics = ["${sakuracloud_switch.sw01.id}"]
 
 }
 

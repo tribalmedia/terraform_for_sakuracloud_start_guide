@@ -19,14 +19,12 @@ resource "sakuracloud_server" "server" {
     name = "server"
     # 接続するディスク
     disks = ["${sakuracloud_disk.disk.id}"]
-    # タグ(NICの準仮想化モード有効化)
-    tags = ["@virtio-net-pci"]
 }
 
 # シンプル監視
 resource "sakuracloud_simple_monitor" "monitor" {
     # 監視対象IPアドレス
-    target = "${sakuracloud_server.server.base_nw_ipaddress}"
+    target = "${sakuracloud_server.server.ipaddress}"
 
     health_check = {
         protocol = "ping"
