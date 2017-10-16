@@ -6,7 +6,7 @@ output "ssh_to_web" {
     value = "${
         zipmap(
             sakuracloud_server.web_servers.*.name, 
-            formatlist("ssh -i id_rsa root@%s", sakuracloud_server.web_servers.*.base_nw_ipaddress)
+            formatlist("ssh -i id_rsa root@%s", sakuracloud_server.web_servers.*.ipaddress)
         )
     }"
 }
@@ -16,7 +16,7 @@ output "ssh_to_db" {
     value = "${
         zipmap(
             sakuracloud_server.db_servers.*.name, 
-            formatlist("ssh -i id_rsa root@%s", sakuracloud_server.db_servers.*.base_nw_ipaddress)
+            formatlist("ssh -i id_rsa root@%s", sakuracloud_server.db_servers.*.ipaddress)
         )
     }"
 }
